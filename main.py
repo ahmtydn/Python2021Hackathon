@@ -3,8 +3,6 @@ import hashlib
 MAX_KEY_VALUE = 26
 
 while True:
-    #dil kontrol için try exception yazılacak
-
     class dilKontrol:
 
         def __init__(self,paragraf):
@@ -113,9 +111,15 @@ while True:
 
                         return key
                     else:
-                        print("\n1 ile {} arasında bir sayı girmelisiniz.\n".format(MAX_KEY_VALUE))
+                        print("\n----------------------------------------------------")
+                        print("-- UYARI: 1 ile {} arasında bir sayı girmelisiniz --".format(MAX_KEY_VALUE))
+                        print("----------------------------------------------------")
+
                 except ValueError:
-                    print("\nSayı girmelisiniz...\n")
+                    print("\n---------------------------------")
+                    print("-- UYARI: Sayı girmelisiniz... --".format(MAX_KEY_VALUE))
+                    print("---------------------------------\n")
+
 
         def getMessage(self, key, type):
             if type == "C":
@@ -144,7 +148,11 @@ while True:
 
         def help(self):
             # dil kontrol  bölümü
+
             print("\n***dilKontrol Sınıfı Açıklamarı***\n")
+            print("init  Fonksiyon Açıklaması : \n")
+            print("Class içinden türetilen nesnelere ait özellikler bu metot ile nesnelere atanır.\n")
+
             print("buyukUnluUyumu Fonksiyon Açıklaması : \n")
             print("Parametre olarak aldığı string kelimelerin büyük ünlü uyumuna uygunluğunu kontrol ederek ,bu kelimelerden büyük ünlü uyumuna "
                   "uygun olanların ve uygun olmayanların sayısını geri dönenen bir fonksiyondur.\n")
@@ -167,6 +175,9 @@ while True:
 
             #sifreleme bölümü
             print("\n***sifrelemeYontemleri Sınıfı Açıklamarı***\n")
+            print("init  Fonksiyon Açıklaması : \n")
+            print("Class içinden türetilen nesnelere ait özellikler bu metot ile nesnelere atanır.\n")
+
             print("md5ilesifreleme Fonksiyon Açıklaması : \n")
             print("Parametre olarak aldığı mesaj stringini haslib kütüphanesini kullanarak MD5 türünde şifreliyor ve şifreli halini geri döndürüyor.\n")
 
@@ -193,10 +204,20 @@ while True:
                   "geri döndürür.Eğer seçim şifre çözme ise sezar şifreleme tersten uygulanarak şifre çözüm işlemi sağlanıp, geriye çözülmüş halini döndürür. \n")
 
     #ANA MENÜ
-    istenilenKisim = int(input("\nYazim kurali için 1'e \n\n"
-                               "Şifreleme İşlemleri İçin 2'ye \n"
-                               "\nHelp için 3'e basiniz : ""\n\nÇıkış Yapmak için 4'e basınız : \n""\n*****************************\n""Seçiminiz :"))
-    if istenilenKisim == 1:
+    def menu():
+        while True:
+            try:
+                istenilenKisim = int(input("\nYazim kurali için 1'e \n\n"
+                                   "Şifreleme İşlemleri İçin 2'ye \n"
+                                   "\nHelp için 3'e basiniz : ""\n\nÇıkış Yapmak için 4'e basınız : \n""\n*****************************\n""Seçiminiz :"))
+                return istenilenKisim
+            except:
+                print("\n---------------------------------------------------")
+                print("-- UYARI: 1 ile 4 arasında sayı girmelisiniz...  --")
+                print("---------------------------------------------------")
+
+    istenilen=menu()
+    if istenilen == 1:
         dil = dilKontrol(paragraf=input("Paragrafı giriniz: "))
         newparagraf = dil.paragrafduzenleme()
 
@@ -215,7 +236,7 @@ while True:
         print("Büyük Ünlü uyumuna uyan kelime sayısı : ", buyukUnluUymazSayisi, "\n")
         print("Büyük Ünlü uyumuna uymayan kelime sayısı : ", buyukUnluUyarSayisi, "\n""\n*****************************\n")
 
-    elif istenilenKisim == 2:
+    elif istenilen == 2:
 
         #asimetrik Sezar şifreleme
         message = input("\nMesajınızı giriniz : ")
@@ -233,8 +254,8 @@ while True:
         print("Sha384 Şifreleme Sonucu: ", sifre1.sha384ilesifreleme())
         print("MD5 Şifreleme Sonucu: ", sifre1.md5ilesifreleme())
 
-    elif istenilenKisim == 3:
+    elif istenilen == 3:
             help=help()
             help.help()
-    elif istenilenKisim==4:
+    elif istenilen==4:
         exit()
